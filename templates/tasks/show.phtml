@@ -1,0 +1,27 @@
+<?= $this->fetch('header.phtml') ?>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">検証機貸出返却ログ</h2>
+      <div class="card-text">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>日付</th>
+            <th>使用者</th>
+            <th>貸出/返却</th>
+          </tr>
+          </thead>
+          <tbody>
+          <?php for($i=count($data)-1;$i>=0;$i--) : ?>
+          <tr>
+          <td><?= e($data[$i]['when']) ?></td>
+          <td><?= e($data[$i]['who']) ?></td>
+          <td><?= e($data[$i]['what']) ?></td>
+          </tr>
+          <?php endfor; ?> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<?= $this->fetch('footer.phtml') ?>

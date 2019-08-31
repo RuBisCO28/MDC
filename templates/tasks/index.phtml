@@ -1,0 +1,50 @@
+<?= $this->fetch('header.phtml') ?>
+  <script>
+  function doReload() {
+      window.location.reload();
+  }
+   
+  window.addEventListener('load', function () {
+      setTimeout(doReload, 5000);
+  });
+  </script>
+  <?php
+    if(file_exists('login_user')){
+        $fp = fopen('login_user', 'r');
+        $login_user = "Hi! " . fgets($fp) . "-san";
+        fclose($fp);
+    } else {
+        $login_user = "";
+    }
+  ?>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">検証機一覧</h2>
+      <h3><font color=red><?php echo e($login_user);?></font></h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>検証機名</th>
+            <th>ステータス</th>
+            <th>ユーザ名</th>
+            <th>最終更新日時</th>
+            <th>貸出返却ログ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($devices as $device): ?>
+            <tr>
+            <th scope="row"><?= e($device['id']) ?></th>
+            <td><?= e($device['device_name']) ?></td>
+            <td><?= e($device['device_status']) ?></td>
+            <td><?= e($device['user_name']) ?></td>
+            <td><?= e($device['last_modify_date']) ?></td>
+            <td><a href="/devices/<?= $device['id']?>" class="btn btn-primary">ログ</a></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<?= $this->fetch('footer.phtml') ?>

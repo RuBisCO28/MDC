@@ -1,0 +1,51 @@
+<?= $this->fetch('header.phtml') ?>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">ユーザ一覧</h2>
+      <a href="/users/create">ユーザ登録</a>
+      <a href="/devices">デバイス一覧</a>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ユーザID</th>
+            <th>ユーザ名</th>
+            <th>削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($users as $user): ?>
+            <tr>
+            <th scope="row"><?= e($user['id']) ?></th>
+            <td><?= e($user['user_id']) ?></td>
+            <td><?= e($user['name']) ?></td>
+            <td><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">削除</button></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ユーザ登録削除</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>本当に削除してよろしいですか？</p>
+        </div>
+        <form method="post" action="/users/<?= e($user['id']) ?>">
+          <input type="hidden" name="_METHOD" value="delete">
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">削除</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<?= $this->fetch('footer.phtml') ?>

@@ -1,0 +1,18 @@
+<?= $this->fetch('header.phtml') ?>
+    <form method="POST" action="/devices">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">検証機登録</h2>
+          <div class="card-text">
+            <div class="form-group">
+              <label for="device_name">検証機名</label>
+              <input type="text" name="device_name" id="device_name" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <button class="btn btn-primary">新規登録</button>
+        </div>
+      </div>
+    </form>
+<?= $this->fetch('footer.phtml') ?>
