@@ -32,13 +32,9 @@ $ cd public
 $ python3 device_manage_servo.py
 ```
 
-2. Run build in server
+2. Monitor Checkout/Return Devices with browser
 ```
-$ ./setup.bash
-```
-
-3. Monitor Checkout/Return Devices with browser
-```
+# Push "Launch Browser" button in QR reader UI
 # Access the following link with browser
 localhost:8080/devices
 ```

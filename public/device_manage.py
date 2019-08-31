@@ -7,6 +7,7 @@ import sys
 import sqlite3
 import time
 import pyautogui
+import subprocess
 from pyzbar.pyzbar import decode
 from PIL import Image, ImageTk
 from threading import Thread
@@ -21,7 +22,15 @@ root.title("QR reader")
 root.geometry("900x480")
 
 canvas = tk.Canvas(root, width=CANVAS_X, height=CANVAS_Y)
-canvas.grid(row=0, column=0)
+canvas.grid(row=0, column=0, rowspan=2)
+
+def LaunchBrowser(event):
+    lb = ["bash","setup.bash"]
+    subprocess.Popen(lb)
+
+Button = tk.Button(text='Launch Browser', width=30)
+Button.bind("<Button-1>",LaunchBrowser) 
+Button.grid(row=1, column=1)
 
 capture = cv2.VideoCapture(0)
 if capture.isOpened() is False:
@@ -157,7 +166,7 @@ def show_frame():
     canvas.create_image(CANVAS_X / 2, CANVAS_Y / 2, image=image_tk)
     now_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     label = tk.Label(root, text="Date: " + now_time + '\n' + 'Login user: ' + username, font=("Helvetica", 14, "bold"))
-    label.grid(row=0, column=1, padx=5, pady=5)
+    label.grid(row=0, column=1)
 
     if not os.path.exists('lock'):
         data = decode(frame)
@@ -208,33 +217,33 @@ def show_frame():
                 else:
                     print("Please show your user_id if you want to borrow or return.")
 
-            # auto_logout
-            if os.path.exists('login_user'):
-                if not os.path.exists('logger'):
+        # auto_logout
+        if os.path.exists('login_user'):
+            if not os.path.exists('logger'):
+                f = open('logger', 'w')
+                f.write(str(pyautogui.position()))
+                f.close()
+                stop = False
+                auto_log(60)
+            if os.path.exists('timeup'):
+                if compare_log():
+                    print("auto logout is done")
+                    delf()
+                    print("Good Bye! {0}!!".format(username))
+                    logout_user(username)
+                    userid = 0
+                    username = ""
+                    lf = 0
+                else:
+                    print("interrupt auto logout")
+                    os.remove('timeup')
                     f = open('logger', 'w')
                     f.write(str(pyautogui.position()))
                     f.close()
                     stop = False
-                    auto_log(60)
-                if os.path.exists('timeup'):
-                    if compare_log():
-                        print("auto logout is done")
-                        delf()
-                        print("Good Bye! {0}!!".format(username))
-                        logout_user(username)
-                        userid = 0
-                        username = ""
-                        lf = 0
-                    else:
-                        print("interrupt auto logout")
-                        os.remove('timeup')
-                        f = open('logger', 'w')
-                        f.write(str(pyautogui.position()))
-                        f.close()
-                        stop = False
-                        auto_log(10)
+                    auto_log(10)
 
-    canvas.after(10, show_frame)
+    canvas.after(100, show_frame)
 
 show_frame()
 root.mainloop()
