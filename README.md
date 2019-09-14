@@ -25,9 +25,9 @@ $ python3 gui.py
 
 2. Launch Server to monitor Checkout/Return Devices with browser
 ```
-# Push "Launch Server" button, then Server will be started
-# Push "Open Browser" button, then Browser will be opened
-# Push "QR reader" button, then QR Reader will be launched
+1. Click "Launch Server" button, then Server start
+2. Click "Open Browser" button, then Browser open
+3. Click "QR reader" button, then QR Reader launch
 ```
 
 # Gallery
