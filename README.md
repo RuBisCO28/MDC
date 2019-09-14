@@ -11,32 +11,23 @@ This application consists of two parts.
 Rasberry Pi 3 MODEL B (OS Rasbian)
 USB camera
 QR code
-
-Optional
 micro servo SG92R(http://akizukidenshi.com/catalog/g/gM-08914/)
 Shelf to storage devices
 ```
 
 # Run Application
 
-1. Run device_manage.py under public directory  
-> Run this application without servo motor
+1. Run gui.py under public directory  
 ```
 $ cd public
-$ python3 device_manage.py
+$ python3 gui.py
 ```
 
-> Run this application with servo motor
+2. Launch Server to monitor Checkout/Return Devices with browser
 ```
-$ cd public
-$ python3 device_manage_servo.py
-```
-
-2. Monitor Checkout/Return Devices with browser
-```
-# Push "Launch Browser" button in QR reader UI
-# Access the following link with browser
-localhost:8080/devices
+# Push "Launch Server" button, then Server will be started
+# Push "Open Browser" button, then Browser will be opened
+# Push "QR reader" button, then QR Reader will be launched
 ```
 
 # Gallery

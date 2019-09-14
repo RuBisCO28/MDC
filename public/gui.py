@@ -7,7 +7,7 @@ import time
 import subprocess
 
 root = tk.Tk()
-root.title("QR reader")
+root.title("MDC")
 root.geometry("200x200")
 
 def LaunchServer(event):

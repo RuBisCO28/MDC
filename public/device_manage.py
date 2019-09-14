@@ -132,6 +132,8 @@ if __name__ == "__main__":
     lf = 0
     userid = 0
     username = ""
+    cmdo = ["python3","open.py"]
+    cmdc = ["python3","close.py"]
 
     while True:
         ret, frame = capture.read()
@@ -157,12 +159,14 @@ if __name__ == "__main__":
                             delf()
                             print("Hi! {0}!! Please show device_id which you want to borrow or return.".format(rec[2]))
                             login_user(username)
+                            subprocess.Popen(cmdo)
                             lock_unlock()
                         else:
                             print("Your UserID is not found. Please ask your administrator.")
                     else:
                         print("Good Bye! {0}!!".format(username))
                         logout_user(username)
+                        subprocess.Popen(cmdc)
                         stop = True
                         delf()
                         userid = 0
@@ -204,6 +208,7 @@ if __name__ == "__main__":
                         delf()
                         print("Good Bye! {0}!!".format(username))
                         logout_user(username)
+                        subprocess.Popen(cmdc)
                         userid = 0
                         username = ""
                         lf = 0
